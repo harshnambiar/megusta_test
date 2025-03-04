@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Me Gusta - Web3 Gaming</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="shortcut icon" href="img/logo.png">
+</head>
+
+<body onload="loadHome();">
+    <div class="background-glitch"></div>
+
+    <header>
+        <nav class="navbar">
+            <div class="nav-left">
+                <a href="index.html"><img src="img/logo.png" alt="Me Gusta Logo" class="logo"></a>
+            </div>
+
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul class="nav-center">
+                <li><a>This is just a testing interface</a></li>
+                
+            </ul>
+            <div id="nright" class="nav-right">
+                <select name="typc" id="chain_name" style="width: 60%;font-size: 1.4em;padding-top: 3%;padding-bottom: 1%;">
+                    <option value="current">Select Chain</option>
+                    <option value="eth">Ethereum</option>
+                    <option value="mnt">Mantle</option>
+                    <option value="lsk">Lisk</option>
+                    <option value="flr">Flare</option>
+                    <option value="gvt">Gravity</option>
+
+
+                </select>
+                <img src="img/wallet-icon.svg" alt="Wallet" class="wallet-icon" onclick="connect();">
+            </div>
+        </nav>
+    </header>
+    <main class="main-container">
+
+        <div class="hero-content">
+            <div class="megusta-container" id="hc">
+                <div class="megusta-shadow"></div>
+                <img src="img/megusta-face.png" alt="Me Gusta Face" class="megusta-face animated">
+            </div>
+            <h1 class="title glitch">ME GUSTA</h1>
+            <p class="subtitle">Hypercasual multi-chain web3 Gaming</p>
+            <div class="buttons">
+                <button class="btn animated" onclick="getMyScore();">My Score</button>
+                <button class="btn animated" onclick="registerScore();">Register Score</button>
+                <button class="btn animated" onclick="getBest();">Top Score</button>
+
+            </div>
+        </div>
+    </main>
+
+    </main>
+
+
+
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-left">
+                <img src="img/logo.png" alt="Me Gusta Logo" class="footer-logo">
+                <p>&copy; 2025 Megusta Gaming by Darksun Labs | All Rights Reserved</p>
+            </div>
+            <div class="footer-right">
+                <a href="about.html">About</a>
+                <a href="games.html">Demo</a>
+            </div>
+        </div>
+    </footer>
+    <canvas id="game" width="620" height="620" style="display:none"></canvas>
+    <script>
+        document.getElementById("mobile-menu").addEventListener("click", function () {
+            document.querySelector(".nav-center").classList.toggle("nav-active");
+        });
+    </script>
+</body>
+
+</html>
