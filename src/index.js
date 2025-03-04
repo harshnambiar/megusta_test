@@ -236,31 +236,31 @@ async function getMyScore() {
         abiInstance = ABIETH.abi;
         contract = new web3.eth.Contract(
                                     abiInstance,
-                     "0x7caf9c2f5074a58ebec737db6022b1b6d46b8b50");
+                     "0x0eab7b60140079059ae79357b2b9d582b90bedd1");
     }
     else if (chn == 'mnt'){
         abiInstance = ABIMNT.abi;
         contract = new web3.eth.Contract(
                                     abiInstance,
-                     "0x235df0fa64b5c273a83835906b5c8f9acb5fe878");
+                     "0x2765cd9a5892c0c19fcb5a9b0c76aef65fafe421");
     }
     else if (chn == 'lsk'){
         abiInstance = ABILSK.abi;
         contract = new web3.eth.Contract(
                                     abiInstance,
-                     "0xddFA5fE9a651eF1411605dA65D73971429841280");
+                     "0x235df0fa64b5c273a83835906b5c8f9acb5fe878");
     }
     else if (chn == 'flr'){
         abiInstance = ABIFLR.abi;
         contract = new web3.eth.Contract(
                                     abiInstance,
-                     "0x45cb97D7DBE1E60661c4cBF1bcbCBd19EC3C34D2");
+                     "0xb0A2aBcb9C0E18b5C66b69d8f7b9018118CE681C");
     }
     else if (chn == 'gvt'){
         abiInstance = ABIGVT.abi;
         contract = new web3.eth.Contract(
                                     abiInstance,
-                     "0x7cAb2686f82905e03a42CFBE053492DB2A6Ed479");
+                     "0x0eab7b60140079059ae79357b2b9d582b90bedd1");
     }
     else {
         console.log('unknown chain');
@@ -268,7 +268,9 @@ async function getMyScore() {
     }
   
   try  {
-    var res = await contract.methods['fetch_myscore'](1).call({from: acc});
+    const arg = BigInt(1);
+    var res = await contract.methods['fetch_myscore'](arg).call({from: acc});
+    console.log(res);
   }
   catch (err){
     console.log(err);
@@ -288,31 +290,85 @@ async function getBest() {
         abiInstance = ABIETH.abi;
         contract = new web3.eth.Contract(
                                     abiInstance,
-                     "0x7caf9c2f5074a58ebec737db6022b1b6d46b8b50");
+                     "0x0eab7b60140079059ae79357b2b9d582b90bedd1");
     }
     else if (chn == 'mnt'){
         abiInstance = ABIMNT.abi;
         contract = new web3.eth.Contract(
                                     abiInstance,
-                     "0x235df0fa64b5c273a83835906b5c8f9acb5fe878");
+                     "0x2765cd9a5892c0c19fcb5a9b0c76aef65fafe421");
     }
     else if (chn == 'lsk'){
         abiInstance = ABILSK.abi;
         contract = new web3.eth.Contract(
                                     abiInstance,
-                     "0xddFA5fE9a651eF1411605dA65D73971429841280");
+                     "0x235df0fa64b5c273a83835906b5c8f9acb5fe878");
     }
     else if (chn == 'flr'){
         abiInstance = ABIFLR.abi;
         contract = new web3.eth.Contract(
                                     abiInstance,
-                     "0x45cb97D7DBE1E60661c4cBF1bcbCBd19EC3C34D2");
+                     "0xb0A2aBcb9C0E18b5C66b69d8f7b9018118CE681C");
     }
     else if (chn == 'gvt'){
         abiInstance = ABIGVT.abi;
         contract = new web3.eth.Contract(
                                     abiInstance,
-                     "0x5bb63DC8FBcb121B980532e845F3Bd1eb503B9aB");
+                     "0x0eab7b60140079059ae79357b2b9d582b90bedd1");
+    }
+    else {
+        console.log('unknown chain');
+        return;
+    }
+  
+
+  const encodedArg = web3.eth.abi.encodeParameter('uint256', 1);
+  const method = abiInstance.find(m => m.name === 'fetch_bestscore');
+  const encodedTx = web3.eth.abi.encodeFunctionCall(method, [1]); 
+  const res = await web3.eth.call({to: contract.options.address, data: encodedTx});
+  console.log(res);
+  
+  
+}
+window.getBest = getBest;
+
+
+async function getCount() {
+    const chn = localStorage.getItem("last_chain");
+    const acc = localStorage.getItem("acc");
+    const web3 = new Web3(window.ethereum);
+    var abiInstance;
+    var contract;
+    
+    if (chn == 'eth'){
+        abiInstance = ABIETH.abi;
+        contract = new web3.eth.Contract(
+                                    abiInstance,
+                     "0x0eab7b60140079059ae79357b2b9d582b90bedd1");
+    }
+    else if (chn == 'mnt'){
+        abiInstance = ABIMNT.abi;
+        contract = new web3.eth.Contract(
+                                    abiInstance,
+                     "0x2765cd9a5892c0c19fcb5a9b0c76aef65fafe421");
+    }
+    else if (chn == 'lsk'){
+        abiInstance = ABILSK.abi;
+        contract = new web3.eth.Contract(
+                                    abiInstance,
+                     "0x235df0fa64b5c273a83835906b5c8f9acb5fe878");
+    }
+    else if (chn == 'flr'){
+        abiInstance = ABIFLR.abi;
+        contract = new web3.eth.Contract(
+                                    abiInstance,
+                     "0xb0A2aBcb9C0E18b5C66b69d8f7b9018118CE681C");
+    }
+    else if (chn == 'gvt'){
+        abiInstance = ABIGVT.abi;
+        contract = new web3.eth.Contract(
+                                    abiInstance,
+                     "0x0eab7b60140079059ae79357b2b9d582b90bedd1");
     }
     else {
         console.log('unknown chain');
@@ -321,16 +377,16 @@ async function getBest() {
   
   
   
-  contract.methods.fetch_bestscore(1)
+  contract.methods.fetch_count()
     .call({from: acc})
     .then((result) => {
-        console.log('Score is:', result);
+        console.log('Count is:', result);
+        console.log(typeof result);
     })
     .catch((error) => {
         console.error('Call Error:', error);
     });
 }
-window.getBest = getBest;
-
+window.getCount = getCount;
 
 
