@@ -389,4 +389,61 @@ async function getCount() {
 }
 window.getCount = getCount;
 
+async function registerScore(){
+    const web3 = new Web3(window.ethereum);
+    const chn = localStorage.getItem("last_chain");
+    const acc = localStorage.getItem("acc");
+    var abiInstance;
+    var contract;
+    var gasprice = 20;
+    
+    if (chn == 'eth'){
+        abiInstance = ABIETH.abi;
+        contract = new web3.eth.Contract(
+                                    abiInstance,
+                     "0x0eab7b60140079059ae79357b2b9d582b90bedd1");
+    }
+    else if (chn == 'mnt'){
+        abiInstance = ABIMNT.abi;
+        contract = new web3.eth.Contract(
+                                    abiInstance,
+                     "0x2765cd9a5892c0c19fcb5a9b0c76aef65fafe421");
+        
+    }
+    else if (chn == 'lsk'){
+        abiInstance = ABILSK.abi;
+        contract = new web3.eth.Contract(
+                                    abiInstance,
+                     "0x235df0fa64b5c273a83835906b5c8f9acb5fe878");
+    }
+    else if (chn == 'flr'){
+        abiInstance = ABIFLR.abi;
+        contract = new web3.eth.Contract(
+                                    abiInstance,
+                     "0xb0A2aBcb9C0E18b5C66b69d8f7b9018118CE681C");
+        gasprice = 50;
+    }
+    else if (chn == 'gvt'){
+        abiInstance = ABIGVT.abi;
+        contract = new web3.eth.Contract(
+                                    abiInstance,
+                     "0x0eab7b60140079059ae79357b2b9d582b90bedd1");
+        
+    }
+    else {
+        console.log('unknown chain');
+        return;
+    }
+  
+  const myAddress = localStorage.getItem("acc");
+  
+  contract.methods.register(10, 1)
+    .send({from: acc , gasPrice: web3.utils.toWei(gasprice, 'gwei')})
+    .catch((error) => {
+        console.error('Call Error:', error);
+    });
+    
+}
+window.registerScore = registerScore;
+
 
