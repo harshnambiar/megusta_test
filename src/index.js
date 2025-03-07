@@ -395,7 +395,6 @@ async function registerScore(){
     const acc = localStorage.getItem("acc");
     var abiInstance;
     var contract;
-    var gasprice = 20;
     
     if (chn == 'eth'){
         abiInstance = ABIETH.abi;
@@ -421,7 +420,6 @@ async function registerScore(){
         contract = new web3.eth.Contract(
                                     abiInstance,
                      "0xb0A2aBcb9C0E18b5C66b69d8f7b9018118CE681C");
-        gasprice = 50;
     }
     else if (chn == 'gvt'){
         abiInstance = ABIGVT.abi;
@@ -434,11 +432,22 @@ async function registerScore(){
         console.log('unknown chain');
         return;
     }
-  
-  const myAddress = localStorage.getItem("acc");
-  
-  contract.methods.register(10, 1)
-    .send({from: acc , gasPrice: web3.utils.toWei(gasprice, 'gwei')})
+
+  var gasEst = BigInt(100000);
+  var gasPriceEst = BigInt(10);
+  try {
+    gasEst = await contract.methods.register(44,1).estimateGas({from: acc});
+    gasEst = (BigInt(11) * gasEst)/BigInt(10);
+    gasPriceEst = await web3.eth.getGasPrice();
+    gasPriceEst = (BigInt(11) * gasPriceEst)/BigInt(10);
+  }
+  catch (err){
+    console.log(err);
+  }
+
+
+  contract.methods.register(12, 1)
+    .send({from: acc, gas: gasEst, gasPrice: gasPriceEst})
     .catch((error) => {
         console.error('Call Error:', error);
     });
