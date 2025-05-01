@@ -76,6 +76,14 @@ async function connect() {
     symbol = 'ETH';
     rpc = "https://sepolia.infura.io";
   }
+  else if (chain_name == 'skl'){
+    chainId = 37084624;
+    cid = '37084624';
+    chain = 'SKALE Nebula Hub Testnet';
+    name = 'SKALE-NEBULA';
+    symbol = 'sFUEL';
+    rpc = "https://testnet.skalenodes.com/v1/lanky-ill-funny-testnet";
+  }
   else {
     console.log('unrecognized chain');
     return;
