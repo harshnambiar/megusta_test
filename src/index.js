@@ -5,6 +5,7 @@ import ABIMNT from './abi_mnt.json';
 import ABILSK from './abi_lsk.json';
 import ABIGVT from './abi_gvt.json';
 import ABIFLR from './abi_flr.json';
+import ABISKL from './abi_skl.json';
 
 
 
@@ -78,7 +79,7 @@ async function connect() {
   }
   else if (chain_name == 'skl'){
     chainId = 37084624;
-    cid = '37084624';
+    cid = '0x235ddd0';
     chain = 'SKALE Nebula Hub Testnet';
     name = 'SKALE-NEBULA';
     symbol = 'sFUEL';
@@ -225,6 +226,7 @@ async function logout(){
         <option value="lsk">Lisk</option>
         <option value="flr">Flare</option>
         <option value="gvt">Gravity</option>
+        <option value="skl">Skale</option>
 
 
     </select>
@@ -269,6 +271,12 @@ async function getMyScore() {
         contract = new web3.eth.Contract(
                                     abiInstance,
                      "0x0eab7b60140079059ae79357b2b9d582b90bedd1");
+    }
+    else if (chn == 'skl'){
+        abiInstance = ABISKL.abi;
+        contract = new web3.eth.Contract(
+                                    abiInstance,
+                     "0xddFA5fE9a651eF1411605dA65D73971429841280");
     }
     else {
         console.log('unknown chain');
@@ -324,6 +332,12 @@ async function getBest() {
                                     abiInstance,
                      "0x0eab7b60140079059ae79357b2b9d582b90bedd1");
     }
+    else if (chn == 'skl'){
+        abiInstance = ABISKL.abi;
+        contract = new web3.eth.Contract(
+                                    abiInstance,
+                     "0xddFA5fE9a651eF1411605dA65D73971429841280");
+    }
     else {
         console.log('unknown chain');
         return;
@@ -378,6 +392,12 @@ async function getCount() {
                                     abiInstance,
                      "0x0eab7b60140079059ae79357b2b9d582b90bedd1");
     }
+    else if (chn == 'skl'){
+        abiInstance = ABISKL.abi;
+        contract = new web3.eth.Contract(
+                                    abiInstance,
+                     "0xddFA5fE9a651eF1411605dA65D73971429841280");
+    }
     else {
         console.log('unknown chain');
         return;
@@ -403,7 +423,7 @@ async function registerScore(){
     const acc = localStorage.getItem("acc");
     var abiInstance;
     var contract;
-    
+    console.log(chn);
     if (chn == 'eth'){
         abiInstance = ABIETH.abi;
         contract = new web3.eth.Contract(
@@ -435,6 +455,12 @@ async function registerScore(){
                                     abiInstance,
                      "0x0eab7b60140079059ae79357b2b9d582b90bedd1");
         
+    }
+    else if (chn == 'skl'){
+        abiInstance = ABISKL.abi;
+        contract = new web3.eth.Contract(
+                                    abiInstance,
+                     "0xddFA5fE9a651eF1411605dA65D73971429841280");
     }
     else {
         console.log('unknown chain');
