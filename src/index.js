@@ -6,7 +6,7 @@ import ABILSK from './abi_lsk.json';
 import ABIGVT from './abi_gvt.json';
 import ABIFLR from './abi_flr.json';
 import ABISKL from './abi_skl.json';
-
+import ABISTT from './abi_stt.json';
 
 
 
@@ -84,6 +84,14 @@ async function connect() {
     name = 'SKALE-NEBULA';
     symbol = 'sFUEL';
     rpc = "https://testnet.skalenodes.com/v1/lanky-ill-funny-testnet";
+  }
+  else if (chain_name == 'stt'){
+    chainId = 50312;
+    cid = '0xc488';
+    chain = 'Somnia Testnet';
+    name = 'SOMNIA';
+    symbol = 'STT';
+    rpc = "https://dream-rpc.somnia.network";
   }
   else {
     console.log('unrecognized chain');
@@ -278,6 +286,12 @@ async function getMyScore() {
                                     abiInstance,
                      "0xddFA5fE9a651eF1411605dA65D73971429841280");
     }
+    else if (chn == 'stt'){
+        abiInstance = ABISTT.abi;
+        contract = new web3.eth.Contract(
+                                    abiInstance,
+                     "0xddFA5fE9a651eF1411605dA65D73971429841280");
+    }
     else {
         console.log('unknown chain');
         return;
@@ -334,6 +348,12 @@ async function getBest() {
     }
     else if (chn == 'skl'){
         abiInstance = ABISKL.abi;
+        contract = new web3.eth.Contract(
+                                    abiInstance,
+                     "0xddFA5fE9a651eF1411605dA65D73971429841280");
+    }
+    else if (chn == 'stt'){
+        abiInstance = ABISTT.abi;
         contract = new web3.eth.Contract(
                                     abiInstance,
                      "0xddFA5fE9a651eF1411605dA65D73971429841280");
@@ -398,6 +418,12 @@ async function getCount() {
                                     abiInstance,
                      "0xddFA5fE9a651eF1411605dA65D73971429841280");
     }
+    else if (chn == 'stt'){
+        abiInstance = ABISTT.abi;
+        contract = new web3.eth.Contract(
+                                    abiInstance,
+                     "0xddFA5fE9a651eF1411605dA65D73971429841280");
+    }
     else {
         console.log('unknown chain');
         return;
@@ -458,6 +484,12 @@ async function registerScore(){
     }
     else if (chn == 'skl'){
         abiInstance = ABISKL.abi;
+        contract = new web3.eth.Contract(
+                                    abiInstance,
+                     "0xddFA5fE9a651eF1411605dA65D73971429841280");
+    }
+    else if (chn == 'stt'){
+        abiInstance = ABISTT.abi;
         contract = new web3.eth.Contract(
                                     abiInstance,
                      "0xddFA5fE9a651eF1411605dA65D73971429841280");
