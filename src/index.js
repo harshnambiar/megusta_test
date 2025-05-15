@@ -512,7 +512,7 @@ async function registerScore(){
   }
 
 
-  contract.methods.register(12, 1)
+  contract.methods.register(14, 1)
     .send({from: acc, gas: gasEst, gasPrice: gasPriceEst})
     .catch((error) => {
         console.error('Call Error:', error);
@@ -522,3 +522,7 @@ async function registerScore(){
 window.registerScore = registerScore;
 
 
+async function to_site(){
+    window.open("https://megustaapp.netlify.app", "_blank");
+}
+window.to_site = to_site;
