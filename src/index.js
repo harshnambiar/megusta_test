@@ -1,5 +1,6 @@
 import detectEthereumProvider from "@metamask/detect-provider"
 import Web3 from "web3";
+import axios from "axios";
 import ABIETH from './abi_eth.json';
 import ABIMNT from './abi_mnt.json';
 import ABILSK from './abi_lsk.json';
@@ -526,3 +527,62 @@ async function to_site(){
     window.open("https://megustaapp.netlify.app", "_blank");
 }
 window.to_site = to_site;
+
+
+async function getDbScores(){
+  const data = {
+    gameId: "3"
+  }
+  try{
+    const res = await axios.post("http://localhost:5000/api/megustacampaign/all", {
+      data: data,
+    });
+
+    console.log(res);
+  }
+  catch (err){
+    console.log(err);
+  }
+}
+window.getDbScores = getDbScores;
+
+async function getMyDbScore(){
+  const data = {
+    wallet: '0xD0dC8A261Ad1B75A92C5e502AE10c3Fde042b879',
+    gameId: "3"
+  };
+
+  try{
+    const res = await axios.post("http://localhost:5000/api/megustacampaign/get", {
+      data: data,
+    });
+    console.log(res.data.entries);
+  }
+  catch (err){
+    console.log(err);
+  }
+}
+window.getMyDbScore = getMyDbScore;
+
+async function setDbScore(){
+  const wl = '0xD0dC8A261Ad1B75A92C5e502AE10c3Fde042b870';
+  const ts = (Date.now()).toString();
+  const data = {
+    wallet: wl,
+    timestamp: ts,
+    score: "105",
+    gameId: "1",
+    sessionId: wl.concat((Math.floor(Math.random(1000,9999))).toString()).concat(ts)
+  };
+  try{
+    const res = await axios.post("http://localhost:5000/api/megustacampaign/set", {
+      data: data,
+    });
+
+    console.log(res);
+  }
+  catch (err){
+    console.log(err);
+  }
+}
+window.setDbScore = setDbScore;
