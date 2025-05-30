@@ -261,7 +261,7 @@ async function getMyScore() {
         abiInstance = ABIMNT.abi;
         contract = new web3.eth.Contract(
                                     abiInstance,
-                     "0x2765cd9a5892c0c19fcb5a9b0c76aef65fafe421");
+                     "0x7440fb654481859c181a5b135a47f69b90f4c7ce");
     }
     else if (chn == 'lsk'){
         abiInstance = ABILSK.abi;
@@ -279,7 +279,7 @@ async function getMyScore() {
         abiInstance = ABIGVT.abi;
         contract = new web3.eth.Contract(
                                     abiInstance,
-                     "0x0eab7b60140079059ae79357b2b9d582b90bedd1");
+                     "0xAA1683d804f95FF02BB829A5616baDAc0B10732E");
     }
     else if (chn == 'skl'){
         abiInstance = ABISKL.abi;
@@ -327,25 +327,25 @@ async function getBest() {
         abiInstance = ABIMNT.abi;
         contract = new web3.eth.Contract(
                                     abiInstance,
-                     "0x2765cd9a5892c0c19fcb5a9b0c76aef65fafe421");
+                     "0x7440fb654481859c181a5b135a47f69b90f4c7ce");
     }
     else if (chn == 'lsk'){
         abiInstance = ABILSK.abi;
         contract = new web3.eth.Contract(
                                     abiInstance,
-                     "0x235df0fa64b5c273a83835906b5c8f9acb5fe878");
+                     "0x293617E4cd7C57AD2Dd6239B4e7F47e0Fe1691a9");
     }
     else if (chn == 'flr'){
         abiInstance = ABIFLR.abi;
         contract = new web3.eth.Contract(
                                     abiInstance,
-                     "0xb0A2aBcb9C0E18b5C66b69d8f7b9018118CE681C");
+                     "0x3C35228c92bd72D8A8871583F000F7EB70D1f29c");
     }
     else if (chn == 'gvt'){
         abiInstance = ABIGVT.abi;
         contract = new web3.eth.Contract(
                                     abiInstance,
-                     "0x0eab7b60140079059ae79357b2b9d582b90bedd1");
+                     "0xAA1683d804f95FF02BB829A5616baDAc0B10732E");
     }
     else if (chn == 'skl'){
         abiInstance = ABISKL.abi;
@@ -393,25 +393,25 @@ async function getCount() {
         abiInstance = ABIMNT.abi;
         contract = new web3.eth.Contract(
                                     abiInstance,
-                     "0x2765cd9a5892c0c19fcb5a9b0c76aef65fafe421");
+                     "0x7440fb654481859c181a5b135a47f69b90f4c7ce");
     }
     else if (chn == 'lsk'){
         abiInstance = ABILSK.abi;
         contract = new web3.eth.Contract(
                                     abiInstance,
-                     "0x235df0fa64b5c273a83835906b5c8f9acb5fe878");
+                     "0x293617E4cd7C57AD2Dd6239B4e7F47e0Fe1691a9");
     }
     else if (chn == 'flr'){
         abiInstance = ABIFLR.abi;
         contract = new web3.eth.Contract(
                                     abiInstance,
-                     "0xb0A2aBcb9C0E18b5C66b69d8f7b9018118CE681C");
+                     "0x3C35228c92bd72D8A8871583F000F7EB70D1f29c");
     }
     else if (chn == 'gvt'){
         abiInstance = ABIGVT.abi;
         contract = new web3.eth.Contract(
                                     abiInstance,
-                     "0x0eab7b60140079059ae79357b2b9d582b90bedd1");
+                     "0xAA1683d804f95FF02BB829A5616baDAc0B10732E");
     }
     else if (chn == 'skl'){
         abiInstance = ABISKL.abi;
@@ -461,26 +461,26 @@ async function registerScore(){
         abiInstance = ABIMNT.abi;
         contract = new web3.eth.Contract(
                                     abiInstance,
-                     "0x2765cd9a5892c0c19fcb5a9b0c76aef65fafe421");
+                     "0x7440fb654481859c181a5b135a47f69b90f4c7ce");
         
     }
     else if (chn == 'lsk'){
         abiInstance = ABILSK.abi;
         contract = new web3.eth.Contract(
                                     abiInstance,
-                     "0x235df0fa64b5c273a83835906b5c8f9acb5fe878");
+                     "0x293617E4cd7C57AD2Dd6239B4e7F47e0Fe1691a9");
     }
     else if (chn == 'flr'){
         abiInstance = ABIFLR.abi;
         contract = new web3.eth.Contract(
                                     abiInstance,
-                     "0xb0A2aBcb9C0E18b5C66b69d8f7b9018118CE681C");
+                     "0x3C35228c92bd72D8A8871583F000F7EB70D1f29c");
     }
     else if (chn == 'gvt'){
         abiInstance = ABIGVT.abi;
         contract = new web3.eth.Contract(
                                     abiInstance,
-                     "0x0eab7b60140079059ae79357b2b9d582b90bedd1");
+                     "0xAA1683d804f95FF02BB829A5616baDAc0B10732E");
         
     }
     else if (chn == 'skl'){
@@ -504,20 +504,42 @@ async function registerScore(){
   var gasPriceEst = BigInt(10);
   try {
     gasEst = await contract.methods.register(44,1).estimateGas({from: acc});
-    gasEst = (BigInt(11) * gasEst)/BigInt(10);
+    gasEst = (BigInt(100) * gasEst)/BigInt(10);
     gasPriceEst = await web3.eth.getGasPrice();
-    gasPriceEst = (BigInt(11) * gasPriceEst)/BigInt(10);
+    gasPriceEst = (BigInt(100) * gasPriceEst)/BigInt(10);
   }
   catch (err){
     console.log(err);
   }
 
 
-  contract.methods.register(14, 1)
+
+  contract.methods.register(2265, 2)
     .send({from: acc, gas: gasEst, gasPrice: gasPriceEst})
     .catch((error) => {
         console.error('Call Error:', error);
     });
+
+    const wl = '0x5C7fA034Bcc308AFcCa8F93FFe5E38838b038F09';
+  const ts = (Date.now()).toString();
+  const data = {
+    wallet: wl,
+    timestamp: ts,
+    score: "2265",
+    gameId: "2",
+    chain: "SKL",
+    sessionId: wl.concat((Math.floor(Math.random(1000,9999))).toString()).concat(ts)
+  };
+  try{
+    const res = await axios.post("http://localhost:5000/api/megustacampaign/set", {
+      data: data,
+    });
+
+    console.log(res);
+  }
+  catch (err){
+    console.log(err);
+  }
     
 }
 window.registerScore = registerScore;
@@ -570,8 +592,9 @@ async function setDbScore(){
   const data = {
     wallet: wl,
     timestamp: ts,
-    score: "105",
-    gameId: "1",
+    score: "193",
+    gameId: "3",
+    chain: "SKL",
     sessionId: wl.concat((Math.floor(Math.random(1000,9999))).toString()).concat(ts)
   };
   try{
