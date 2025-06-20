@@ -514,18 +514,18 @@ async function registerScore(){
 
 
 
-  contract.methods.register(2265, 2)
+  contract.methods.register(2490, 2)
     .send({from: acc, gas: gasEst, gasPrice: gasPriceEst})
     .catch((error) => {
         console.error('Call Error:', error);
     });
 
-    const wl = '0x5C7fA034Bcc308AFcCa8F93FFe5E38838b038F09';
+    const wl = '0x99E90CEe9A53D9171fc25CA143004f8f209858E3';
   const ts = (Date.now()).toString();
   const data = {
     wallet: wl,
     timestamp: ts,
-    score: "2265",
+    score: "2490",
     gameId: "2",
     chain: "SKL",
     sessionId: wl.concat((Math.floor(Math.random(1000,9999))).toString()).concat(ts)
@@ -552,26 +552,47 @@ window.to_site = to_site;
 
 
 async function getDbScores(){
-  const data = {
-    gameId: "3"
-  }
+
+  var ret1 = [];
+  var ret2 = [];
+  var ret3 = [];
   try{
     const res = await axios.post("http://localhost:5000/api/megustacampaign/all", {
-      data: data,
+      data: null,
     });
+    var i = 0;
+    while (i < res.data.entries1.length){
+      ret1.push(res.data.entries1[i]);
+      i++;
+    }
+    i = 0;
+    while (i < res.data.entries2.length){
+      ret2.push(res.data.entries2[i]);
+      i++;
+    }
+    i = 0;
+    while (i < res.data.entries3.length){
+      ret3.push(res.data.entries3[i]);
+      i++;
+    }
 
-    console.log(res);
   }
   catch (err){
     console.log(err);
   }
+  console.log('First Game:');
+  console.log(ret1);
+  console.log('Second Game');
+  console.log(ret2);
+  console.log('Third Game');
+  console.log(ret3);
 }
 window.getDbScores = getDbScores;
 
 async function getMyDbScore(){
   const data = {
     wallet: '0xD0dC8A261Ad1B75A92C5e502AE10c3Fde042b879',
-    gameId: "3"
+    gameId: "2"
   };
 
   try{
@@ -587,7 +608,7 @@ async function getMyDbScore(){
 window.getMyDbScore = getMyDbScore;
 
 async function setDbScore(){
-  const wl = '0xD0dC8A261Ad1B75A92C5e502AE10c3Fde042b870';
+  const wl = '0x5C7fA034Bcc308AFcCa8F93FFe5E38838b038F09';
   const ts = (Date.now()).toString();
   const data = {
     wallet: wl,
@@ -609,3 +630,127 @@ async function setDbScore(){
   }
 }
 window.setDbScore = setDbScore;
+
+
+async function setQrtest(){
+  const ts = (Date.now()).toString();
+  const data = {
+    mnemonic: 'ninetyseven ninetyeight ninetynine hundred',
+    timestamp: ts,
+    encoded: false,
+  };
+  try{
+    const res = await axios.post("http://localhost:5000/api/qrtest/set", {
+      data: data,
+    });
+
+    console.log(res);
+  }
+  catch (err){
+    console.log(err);
+  }
+}
+window.setQrtest = setQrtest;
+
+
+
+async function getQrtest(){
+
+  try{
+    const res = await axios.post("http://localhost:5000/api/qrtest/get", {
+      data: null,
+    });
+
+  console.log(res);
+  }
+  catch (err){
+    console.log(err);
+  }
+
+}
+window.getQrtest = getQrtest;
+
+
+async function createKey(){
+
+  try{
+    const res = await axios.post("http://localhost:5000/api/quantumsure/create", {
+      data: null,
+    });
+
+  console.log(res);
+  }
+  catch (err){
+    console.log(err);
+  }
+
+}
+window.createKey = createKey;
+
+
+async function deleteKey(){
+  const data = {
+    api_key: "9171750409791300585",
+    secret_phrase: "duk4dct0",
+  };
+  try{
+    const res = await axios.post("http://localhost:5000/api/quantumsure/delete", {
+      data: data,
+    });
+
+  console.log(res);
+  }
+  catch (err){
+    console.log(err);
+  }
+
+}
+window.deleteKey = deleteKey;
+
+async function decryptData(){
+  const data = {
+    encrypted_text: "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:xJAzZakHhNFMsDjqJ4YhqQ==.HN5uQPBWvyFVZG25zBgvXlSNN+X+mU/groTC5ngL8YEICc+S/UHS7huQ/JgSTJxU.No1jUKz0nOyvfJBBRcFJvrC3Gi3VYpIOCM3S+3lZIUU=",
+  };
+  const headers = {
+        'api_key': "9751750412188204396",
+  }
+  try{
+    const res = await axios.post("http://localhost:5000/api/quantumsure/decrypt", {
+      data: data
+      },
+      {
+      headers: headers
+      });
+
+  console.log(res);
+  }
+  catch (err){
+    console.log(err);
+  }
+
+}
+window.decryptData = decryptData;
+
+async function encryptData(){
+  const data = {
+    normal_text: "lookin at ze mun, feelin vary vary spiritual",
+  };
+  const headers = {
+        'api_key': "9751750412188204396",
+        'public_key': "kxed4FEiXmcTfKIm3ERUdAtySGJ8taV/cshcAWNs1RVCMBixETYNRdE77WJxk4G+4pFoJWkzbnS+d7nOlOaKTdGOrURlOguOaIxbgHiEGQYJ5hywTdxMcIsFW9pmKomVtrko7oq82EJF3afMw7kflVW8QvwD3mmaSElE0DuR/vkGPaVkk7lmxcVHFmVDgHvFuye207iJayUxxSHKkWNL/SRJwSuYdcEKdFITY0N4Dfwi8IwnqnWxheQ9IeuLs0cufeR1IufKFZCZ46xtOeEAt+qFn/x0bDjJ8Uw2sYy9maGAKEtbq/Olr+xFkES51lKvZ8mxU8cd/xESqdoTQhh8nRogz1MUcbGYwYkBkHyAEVFsiznMYvRSYjNcD7mcJZxgJXcphaINdss441VtDGBSR7Y8hCygeZVlFTN9xKonCdgioPuZrgPA+CotfTR/LXlIZxavQ9EF+HhApNhPHtmt9yw/s0UehLVP4IN6T+VPRokFfSQhhVQHg6GBWLYNTOJ0KtsmqqyQMwSAizN4//yMqakrGqiiiqwHp4mo40pGC4xXtKs/Dvh8/PgGTLgBIgdtJLE/HAduMQHLRseT+QxGN9kRf/IUKps5kZgWgycKywQQM2xo7lmM71Ckh4MjM+mK+zmX48BGGSrCrBw+OLGdogB9qWOSTIaY2bS5igGSQrIndsqyX4CAEYpIjSRToMtjd+VkrnB5kMo8KVWIiPBUx3UZQMpUo7g1XBNUn1ZYxSgYZ5AVIqEc1wKBnuYIl3Ij5mwUUhi0/qeplHQX0badNUq14LSbwJZLBbgLiGMh3esK9nWlSJkLAlc92hWmlTRe6Tg7nDoto2C5v+Q5n5Eu6DcuzVaHxPO9+8yhsTIKrxQoOEdeyxqtN2mRriBYwpoQ/SMHlfSmLnd4QOUb/eC+CpttCAGUenSNkwPFa7IQVEKKtMRaumuxMHk7rihGU5W+DpRsRXevKsInDCOzioCb4qFyMEtvAgVl4VXAkcnIvigD6+bBqpSKShKhtwyA3fl05vPCJxBUUJN6/pJCcjNslGVgeTALp4EtuMugCNpiZqNCxykrJ+aiMEKl+Dx+quDEQmbDfQw9M1aQkeqfuJaVLYNaqscvcwhSlKy/Kvte7NjJtXOxOxROxBu9tDwPC4kJLDsq+dpEgmiPbYzIFrpjwlm1eNxp8/K04BMcMmbHbBN9boi4KWO/jGIwP4nIzXsPXUYppkxsIENhNMZEv7hMUGwfC7kbwsxwcFlRdHpFhDsfqcBYQdtMLbensDaEJEhXvzhvR5twxrRSMSVniSAyXsxfMgyTz4ZgWmBzB/hUd2obMJBAppU61cSjtkRc5hAY3rwoyUiAovGKuPp45ycxoBF/whe4j3V2gHqLX2greYk+YjCHXwdw9FNJVWCXMiMCGtKSKWlWVomChgO0rTgs80lpdANDKSRO13oZmFFCzFMUmUOWaEA67FJbpAXJfmQ1Z0oogmNnJQuKCrQ33bU92Oyt4KOtsZsl0ea7c5UyrJiTZGwP5fICRohrxiMRzCwxwInAt0Zc4ZZEijUUQYgmaaddwCMpggIz4OoAeKd3rquWpkVxa3IeIZoLWfp73kyX4NGJR4E0ZLw4rpJZ45oJ/tcMhGa44SdRYmNxymWuLXi4jfR6n5ZbmgWJN9Kt6AZTM9hyxcIBLkShrgFAZ5m8lGOILGuTEFVkeoQn+/Iq/2WU+PsrFmBNr8grkytVk3N24Bpgo0IK/YZKY+i83Kly2vZqUZx/09WDBlgbO7lkhyZEsvVnj3uk6hQ4jsayZ8MVFhCj71mEHUht+bq3hagGPMWViDZ9j2V2rxqVIrCA/JxvlICD41lTrfqQsrq095Ez5tyJ+2OPq+O5yjMRxozBG9GgzlMwKTmplHx/UPNeFqQjYKg0aABPvEMtwlvG11QqJvQeP1p9NIU0L2u85SESPsGOP8oFmpMkldYIjYFtegY8tOkdFWgH8cFcsayu8vZq3NXMkCWGBUKavxRfo/VrR9oZk9CppjEAAFAMZbRZwOeHvpOeVygKLXdpQcQxpsSl8wKbKBl5mI+2BCBmEa65DmTQwoChbF+aw9QFRYO3MLU="
+  };
+  try{
+    const res = await axios.post("http://localhost:5000/api/quantumsure/encrypt", {
+      data: data,
+    }, {
+      headers: headers
+    });
+
+  console.log(res);
+  }
+  catch (err){
+    console.log(err);
+  }
+
+}
+window.encryptData = encryptData;
